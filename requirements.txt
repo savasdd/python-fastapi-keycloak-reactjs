@@ -5,3 +5,5 @@ pip install flask-sqlalchemy
 pip install pyscopg2
 pip install flask-migrate
 pip list
+
+pip install python-keycloak

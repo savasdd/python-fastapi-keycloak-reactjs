@@ -30,6 +30,7 @@ class ListMovie(BaseModel):
 
 # images
 
+
 class ImageBase(BaseModel):
     name: Optional[str]
     movie_id: uuid.UUID | None = None
@@ -51,3 +52,24 @@ class ResponseImage(ImageBase):
 class ListImage(BaseModel):
     results: int
     data: List[ResponseImage]
+
+# auth
+
+
+class AuthBase(BaseModel):
+    username: Optional[str]
+    password: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+
+class ResponseToken(BaseModel):
+    access_token: Optional[str]
+    expires_in : Optional[int]
+    refresh_token :Optional[str]
+    refresh_expires_in: Optional[int]
+    token_type : Optional[str]
+
+    class Config:
+        orm_mode = True

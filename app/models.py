@@ -18,6 +18,7 @@ class Movies(Base):
     updated_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text("now()"))
 
+
 class MoviesImages(Base):
     __tablename__ = 'movies_images'
     id = Column(UUID(as_uuid=True), primary_key=True,
@@ -30,3 +31,17 @@ class MoviesImages(Base):
     updated_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text("now()"))
     movies = relationship('Movies')
+
+
+class TokenRequest:
+    username = str
+    password = str
+
+
+class TokenResponse:
+    def __init__(self, access_token: str, expires_in: int, refresh_token: str, refresh_expires_in: int, token_type: str):
+        self.access_token = access_token
+        self.expires_in = expires_in
+        self.refresh_token = refresh_token
+        self.refresh_expires_in = refresh_expires_in
+        self.token_type = token_type

@@ -7,6 +7,6 @@ from .. import schemas, service_auth
 router = APIRouter()
 
 
-@router.post("/auth", status_code=status.HTTP_200_OK)
-def createImage():
-    return service_auth.getToken(username="savas.dede", password="123")
+@router.post("/auth", response_model=schemas.ResponseToken, status_code=status.HTTP_200_OK)
+def createImage(dto: schemas.AuthBase):
+    return service_auth.getToken(dto=dto)
