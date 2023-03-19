@@ -1,16 +1,22 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status, Response
 from . import models, schemas
-import base64
+import logging
 from keycloak import KeycloakOpenID
+
+SERVER_URL = "http://localhost:8043/auth/"
+CLIENT_ID = "food-microservice-backend"
+REALM_NAME = "food-microservice"
+SECRET_KEY = "8It8vOmZU0iAWEJGbEgowvUaQWSSH523"
+
+log = logging.getLogger()
+log.setLevel(logging.INFO)
 
 
 def getToken(dto: models.TokenRequest):
 
-    keycloak_openid = KeycloakOpenID(server_url="http://localhost:8043/auth/",
-                                     client_id="food-microservice-backend",
-                                     realm_name="food-microservice",
-                                     client_secret_key="8It8vOmZU0iAWEJGbEgowvUaQWSSH523")
+    keycloak_openid = KeycloakOpenID(
+        server_url=SERVER_URL, client_id=CLIENT_ID, realm_name=REALM_NAME, client_secret_key=SECRET_KEY)
 
     token = keycloak_openid.token(
         username=dto.username,
@@ -23,13 +29,12 @@ def getToken(dto: models.TokenRequest):
     )
 
     resp = models.TokenResponse(
-        access_token="strfvgyuhjımkoplğş",
-        expires_in=1800,
-        refresh_token="fgjhkljghjkhjöhöjh",
-        refresh_expires_in=2560,
-        token_type="Bearer"
+        access_token=token['access_token'],
+        expires_in=token['expires_in'],
+        refresh_token=token['refresh_token'],
+        refresh_expires_in=token['refresh_expires_in'],
+        token_type=token['token_type']
     )
 
-    print(token)
-
+    log.warn('Generated Token: '+dto.username)
     return resp
