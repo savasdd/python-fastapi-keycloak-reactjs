@@ -8,5 +8,5 @@ router = APIRouter()
 
 
 @router.post("/auth", response_model=schemas.ResponseToken, status_code=status.HTTP_200_OK)
-def createImage(dto: schemas.AuthBase):
+def getToken(dto: schemas.AuthBase):
     return service_auth.getToken(dto=dto)
