@@ -1,0 +1,7 @@
+pip install flask
+pip install flask-restful
+pip install flask-cors
+pip install flask-sqlalchemy
+pip install pyscopg2
+pip install flask-migrate
+pip list
