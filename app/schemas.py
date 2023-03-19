@@ -27,3 +27,27 @@ class ResponseMovie(MovieBase):
 class ListMovie(BaseModel):
     results: int
     data: List[ResponseMovie]
+
+# images
+
+class ImageBase(BaseModel):
+    name: Optional[str]
+    movie_id: uuid.UUID | None = None
+
+    class Config:
+        orm_mode = True
+
+
+class CreateImage(ImageBase):
+    pass
+
+
+class ResponseImage(ImageBase):
+    id: Optional[uuid.UUID]
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+
+
+class ListImage(BaseModel):
+    results: int
+    data: List[ResponseImage]
