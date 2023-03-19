@@ -7,7 +7,11 @@ from app.controller import movies_api,images_api,auth_api
 
 app = FastAPI()
 
-origins = [settings.CLIENT_ORIGIN]
+origins = [
+    settings.CLIENT_ORIGIN,
+    "http://localhost",
+    "http://localhost:3000",
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
