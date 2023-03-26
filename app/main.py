@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from .database import get_db
-from app.controller import movies_api,images_api,auth_api
+from app.controller import cars_api, detail_api,auth_api
 
 
 app = FastAPI()
@@ -21,6 +21,6 @@ app.add_middleware(
 )
 
 app.include_router(auth_api.router, tags=['Auth'], prefix='/api')
-app.include_router(movies_api.router, tags=['Movies'], prefix='/api')
-app.include_router(images_api.router, tags=['Images'], prefix='/api')
+app.include_router(cars_api.router, tags=['Cars'], prefix='/api')
+app.include_router(detail_api.router, tags=['Details'], prefix='/api')
 

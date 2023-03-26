@@ -5,53 +5,57 @@ from pydantic import BaseModel, EmailStr, constr
 from pydantic.schema import Optional, Dict
 
 
-class MovieBase(BaseModel):
+class CarBase(BaseModel):
     name: Optional[str]
-    count: Optional[int]
+    seri: Optional[str]
+    model: Optional[str]
+    year: Optional[int]
+    km: Optional[float]
+    color: Optional[str]
     price: Optional[float]
 
     class Config:
         orm_mode = True
 
 
-class CreateMovie(MovieBase):
+class CreateCar(CarBase):
     description: str | None = None
 
 
-class ResponseMovie(MovieBase):
+class ResponseCar(CarBase):
     id: Optional[uuid.UUID]
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
 
 
-class ListMovie(BaseModel):
+class ListCar(BaseModel):
     results: int
-    data: List[ResponseMovie]
+    data: List[ResponseCar]
 
 # images
 
 
-class ImageBase(BaseModel):
+class DetailBase(BaseModel):
     name: Optional[str]
-    movie_id: uuid.UUID | None = None
+    car_id: uuid.UUID | None = None
 
     class Config:
         orm_mode = True
 
 
-class CreateImage(ImageBase):
+class CreateDetail(DetailBase):
     pass
 
 
-class ResponseImage(ImageBase):
+class ResponseDetail(DetailBase):
     id: Optional[uuid.UUID]
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
 
 
-class ListImage(BaseModel):
+class ListDetail(BaseModel):
     results: int
-    data: List[ResponseImage]
+    data: List[ResponseDetail]
 
 # auth
 
@@ -66,10 +70,10 @@ class AuthBase(BaseModel):
 
 class ResponseToken(BaseModel):
     access_token: Optional[str]
-    expires_in : Optional[int]
-    refresh_token :Optional[str]
+    expires_in: Optional[int]
+    refresh_token: Optional[str]
     refresh_expires_in: Optional[int]
-    token_type : Optional[str]
+    token_type: Optional[str]
 
     class Config:
         orm_mode = True
