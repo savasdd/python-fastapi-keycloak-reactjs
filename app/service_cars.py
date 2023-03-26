@@ -23,6 +23,7 @@ def createCar(db: Session, dto: schemas.CreateCar):
         km=dto.km,
         color=dto.color,
         price=dto.price,
+        advertDate=dto.advertDate,
         description=dto.description)
 
     db.add(model)

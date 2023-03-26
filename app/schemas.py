@@ -1,4 +1,5 @@
 from datetime import datetime
+from datetime import date
 from typing import List, Union
 import uuid
 from pydantic import BaseModel, EmailStr, constr
@@ -13,6 +14,7 @@ class CarBase(BaseModel):
     km: Optional[float]
     color: Optional[str]
     price: Optional[float]
+    advertDate:Optional[date]
 
     class Config:
         orm_mode = True
