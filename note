@@ -1,0 +1,4 @@
+py -3 -m venv venv
+pip install fastapi[all]
+uvicorn app.main:app --host localhost --port 8000 --reload
+Url: https://codevoweb.com/crud-restful-api-server-with-python-fastapi-and-postgresql/
